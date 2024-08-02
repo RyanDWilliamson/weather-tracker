@@ -41,7 +41,13 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
-
+    - name: Archive files
+      run: zip -r build.zip build/
+    - name: Upload artifact for development job
+      uses: actions/upload-artifact@v3
+      with: 
+        name: node-app
+        path: build.zip
     - name: npm install, build, and test
       run: |
         npm install
